@@ -1,0 +1,26 @@
+{% extends "./base.html" %}
+
+{% block title %}
+    QRCode Generator
+{% endblock title %}
+
+{% block body_content %}
+<div class="container">
+    <br><h1>Welcome, Django Cameroon members !</h1><br>
+    <div class="row row-cols-1 row-cols-md-5 g-4">
+        {% for data in all_data %}
+            <div class="col">
+                <div class="card h-100">
+                    <img src={{ data.qr_code.url }} class="card-img-top" alt={{ data.uuid }}>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ data.uuid }}</h5>
+                        <p class="card-text">{{ data.content }}</p>
+                    </div>
+                    <a href={{ data.qr_code.url }} role="button" class="btn btn-success">Display QR Code</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <br>
+</div>
+{% endblock body_content %}

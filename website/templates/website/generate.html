@@ -1,0 +1,28 @@
+{% extends "./base.html" %}
+
+{% block title %}
+    QRCode Generator - Generation
+{% endblock title %}
+
+{% block body_content %}
+<div class="container">
+    <h1>Generate a QR Code</h1><br>
+    <div class="row">
+        <div class="col-md-6">
+            <form method="POST" action={% url 'generate' %} class="column mb-2">  
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label for="content" class="form-label">Data to encode</label>
+                  <textarea rows="10" class="form-control" id="content" name="content">{{ content | default:'' }}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Generate</button>
+            </form>
+        </div>
+        {% if qr_code %}
+            <div class="col-md-6">
+                <img src="{{ qr_code }}" alt="QrCode" class="img-fluid">
+            </div>
+        {% endif %}
+    </div>
+</div>    
+{% endblock body_content %}
